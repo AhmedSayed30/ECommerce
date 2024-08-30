@@ -6,5 +6,14 @@
     </style>
 
     <style name="Theme.ECommerce" parent="Base.Theme.ECommerce" />
-
+    <style name="Theme.MainActivityTheme" parent="Theme.ECommerce">
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="android:windowBackground">@drawable/launcher_background</item>
+    </style>
 </resources>
