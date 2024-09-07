@@ -1,0 +1,102 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="72dp"
+            android:height="72dp"
+            android:viewportWidth="72"
+            android:viewportHeight="72">
+            <group android:name="group">
+                <path
+                    android:name="path"
+                    android:pathData="M 16 0 L 56 0 C 60.242 0 64.314 1.687 67.314 4.686 C 70.313 7.686 72 11.758 72 16 L 72 56 C 72 60.242 70.313 64.314 67.314 67.314 C 64.314 70.313 60.242 72 56 72 L 16 72 C 11.758 72 7.686 70.313 4.686 67.314 C 1.687 64.314 0 60.242 0 56 L 0 16 C 0 11.758 1.687 7.686 4.686 4.686 C 7.686 1.687 11.758 0 16 0"
+                    android:fillColor="#ffffff"
+                    android:strokeWidth="1"/>
+            </group>
+            <group android:name="group_1">
+                <path
+                    android:name="path_1"
+                    android:pathData="M 50.828 33.172 C 52.391 34.734 52.391 37.266 50.828 38.828 L 38.828 50.828 C 37.266 52.391 34.734 52.391 33.172 50.828 L 21.172 38.828 C 19.61 37.266 19.61 34.734 21.172 33.172 L 33.172 21.172 C 34.734 19.61 37.266 19.61 38.828 21.172 L 50.828 33.172 Z M 36 29.657 L 29.657 36 L 36 42.343 L 42.343 36 L 36 29.657 Z"
+                    android:fillColor="#40bfff"
+                    android:strokeWidth="1"
+                    android:fillType="evenOdd"/>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="scaleX"
+                    android:startOffset="100"
+                    android:duration="300"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/linear_interpolator"/>
+                <objectAnimator
+                    android:propertyName="scaleY"
+                    android:startOffset="100"
+                    android:duration="300"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/linear_interpolator"/>
+                <objectAnimator
+                    android:propertyName="pivotX"
+                    android:duration="300"
+                    android:valueFrom="36"
+                    android:valueTo="36"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/bounce_interpolator"/>
+                <objectAnimator
+                    android:propertyName="pivotY"
+                    android:duration="300"
+                    android:valueFrom="36"
+                    android:valueTo="36"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/bounce_interpolator"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="group_1">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="scaleX"
+                    android:startOffset="200"
+                    android:duration="100"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/linear_interpolator"/>
+                <objectAnimator
+                    android:propertyName="scaleY"
+                    android:startOffset="200"
+                    android:duration="100"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/linear_interpolator"/>
+                <objectAnimator
+                    android:propertyName="pivotX"
+                    android:startOffset="200"
+                    android:duration="100"
+                    android:valueFrom="36"
+                    android:valueTo="36"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/bounce_interpolator"/>
+                <objectAnimator
+                    android:propertyName="pivotY"
+                    android:startOffset="200"
+                    android:duration="100"
+                    android:valueFrom="36"
+                    android:valueTo="36"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/bounce_interpolator"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
