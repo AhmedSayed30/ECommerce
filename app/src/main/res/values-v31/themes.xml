@@ -5,7 +5,7 @@
         <item name="windowSplashScreenBackground">@color/blue</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim</item>
         <item name="postSplashScreenTheme">@style/Theme.ECommerce</item>
-        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <item name="windowSplashScreenAnimationDuration">3000</item>
         <item name="android:statusBarColor">@color/blue</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
