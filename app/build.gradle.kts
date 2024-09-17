@@ -59,4 +59,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     // crashlytics
     implementation("com.google.firebase:firebase-crashlytics")
+    // reactive network
+    implementation ("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
+
 }
