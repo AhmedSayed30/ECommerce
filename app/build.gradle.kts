@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -52,4 +53,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.core:core-splashscreen:1.0.0")
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    //
+    implementation("com.google.firebase:firebase-analytics")
+    // crashlytics
+    implementation("com.google.firebase:firebase-crashlytics")
+    // reactive network
+    implementation ("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
+
 }
