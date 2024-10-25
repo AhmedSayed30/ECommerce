@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.auth.login.fragment.LoginFragment">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="96dp"
+                    android:src="@drawable/inner_logo"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/auth_welcome_msg"
+                    style="@style/TitleTextStyle"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/sign_in_msg"
+                    style="@style/MassageTextStyle"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    style="@style/EditTextStyle"
+                    android:layout_marginTop="36dp"
+                    android:drawableStart="@drawable/ic_email"
+                    android:hint="@string/your_email"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    style="@style/EditTextStyle"
+                    android:layout_marginTop="8dp"
+                    android:drawableStart="@drawable/ic_passwordd"
+                    android:hint="@string/password"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/brn_sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/sign_in"
+                    style="@style/PrimaryButtonStyle"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="21dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/neutral_light"/>
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/or"
+                        android:textAllCaps="true"
+                        android:background="@color/white"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:textColor="@color/gray"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_google_log_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/login_with_google"
+                    android:drawableStart="@drawable/ic_google"
+                    style="@style/SocialButtonStyle"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_facebook_log_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/login_with_facebook"
+                    android:drawableStart="@drawable/ic_facebook"
+                    style="@style/SocialButtonStyle"/>
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/forgot_password"
+                    style="@style/MediumPrimaryTextViewStyle"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/register_contner"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/don_t_have_a_account"
+                        style="@style/MassageTextStyle"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register"
+                        android:layout_marginStart="4dp"
+                        style="@style/MediumPrimaryTextViewStyle"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
