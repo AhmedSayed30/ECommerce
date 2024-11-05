@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.training.ecommerce.R
 import com.training.ecommerce.data.datasourse.datastore.UserPreferencesDataSourse
+import com.training.ecommerce.data.repository.auth.FirebaseAuthRepositoryImpl
 import com.training.ecommerce.data.repository.user.UserPreferencesRepositoryImpl
 import com.training.ecommerce.databinding.FragmentLoginBinding
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel
@@ -19,9 +20,10 @@ class LoginFragment : Fragment() {
     private val binging get() = _binding!!
     val viewModel: LoginViewModel by viewModels {
         LoginViewModelFactory(
-            UserPreferencesRepositoryImpl(
+            userPref = UserPreferencesRepositoryImpl(
                 UserPreferencesDataSourse(
-                    requireActivity())))
+                    requireActivity())),
+            authRepository = FirebaseAuthRepositoryImpl())
     }
 
     override fun onCreateView(
@@ -29,6 +31,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater,container,false)
+        binging.lifecycleOwner = viewLifecycleOwner
+        binging.vm = viewModel
         return binging.root
     }
 

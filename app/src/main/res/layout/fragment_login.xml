@@ -48,7 +48,9 @@
                     android:layout_height="48dp"
                     style="@style/EditTextStyle"
                     android:layout_marginTop="36dp"
+                    android:text="@={vm.email}"
                     android:drawableStart="@drawable/ic_email"
+                    android:inputType="textEmailAddress"
                     android:hint="@string/your_email"/>
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -57,6 +59,8 @@
                     android:layout_height="48dp"
                     style="@style/EditTextStyle"
                     android:layout_marginTop="8dp"
+                    android:inputType="textPassword"
+                    android:text="@={vm.password}"
                     android:drawableStart="@drawable/ic_passwordd"
                     android:hint="@string/password"/>
 
@@ -66,6 +70,7 @@
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/sign_in"
+                    android:onClick="@={() -> vm.login()}"
                     style="@style/PrimaryButtonStyle"/>
 
                 <RelativeLayout

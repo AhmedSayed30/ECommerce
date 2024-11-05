@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch(Main){
             if (viewModel.isUserLoggedIn().first()){
                 setContentView(R.layout.activity_main)
+                viewModel.setIsLoggedIn(false)
             } else{
                 viewModel.setIsLoggedIn(true)
                 goToAuthActivity()
