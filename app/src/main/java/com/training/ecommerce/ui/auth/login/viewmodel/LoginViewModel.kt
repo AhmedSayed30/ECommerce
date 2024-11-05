@@ -18,13 +18,18 @@ class LoginViewModel(
     val password = MutableStateFlow("")
 
     fun login(){
-        viewModelScope.launch {
-            val email = email.value
-            val password = password.value
-            if (email.isNullOrBlank()&&password.isNullOrBlank())
-            authRepository.loginWithEmailAndPassword(email, password)
+        val email = email.value
+        val password = password.value
+
+        if (email.isNullOrBlank() && password.isNullOrBlank()){
+            viewModelScope.launch {
+                authRepository.loginWithEmailAndPassword(email, password)
+            }
         }
+
     }
+
+
 companion object{
     private const val TAG = "LoginViewModel"
 }
@@ -33,8 +38,8 @@ class LoginViewModelFactory(
     private val userPref: UserPreferencesRepository,
     private val authRepository: FirebaseAuthRepository):
     ViewModelProvider.Factory{
-    override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-        if (modelClass.isAssignableFrom(UserViewModel::class.java)){
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(LoginViewModel::class.java)){
             @Suppress("UNCHECKED_CAST") return LoginViewModel(userPref, authRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
