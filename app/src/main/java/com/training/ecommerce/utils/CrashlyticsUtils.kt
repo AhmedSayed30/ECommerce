@@ -1,18 +1,23 @@
 package com.training.ecommerce.utils
 
+import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 object CrashlyticsUtils {
 
+
+
     /**
      * Endpoint Keys
      */
-    const val CUSTOME_ENDPOINT_KEY = "CUSTOME_ENDPOINT_KEY"
+    const val CUSTOM_ENDPOINT_KEY = "CUSTOM_ENDPOINT_KEY"
 
     /**
      * random cases key
      */
     const val CUSTOM_KEY = "CUSTOM_KEY"
+    const val LOGIN_KEY = "LOGIN_KEY"
+    const val PROVIDER_KEY = "LOGIN_PROVIDER"
 
 
 

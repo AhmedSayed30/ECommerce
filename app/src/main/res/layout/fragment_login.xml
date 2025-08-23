@@ -48,7 +48,9 @@
                     android:layout_height="48dp"
                     style="@style/EditTextStyle"
                     android:layout_marginTop="36dp"
+                    android:text="@={vm.email}"
                     android:drawableStart="@drawable/ic_email"
+                    android:inputType="textEmailAddress"
                     android:hint="@string/your_email"/>
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -57,15 +59,18 @@
                     android:layout_height="48dp"
                     style="@style/EditTextStyle"
                     android:layout_marginTop="8dp"
+                    android:inputType="textPassword"
+                    android:text="@={vm.password}"
                     android:drawableStart="@drawable/ic_passwordd"
                     android:hint="@string/password"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/brn_sign_in"
+                    android:id="@+id/btn_sign_in"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/sign_in"
+                    android:onClickListener="@{() -> vm.login()}"
                     style="@style/PrimaryButtonStyle"/>
 
                 <RelativeLayout

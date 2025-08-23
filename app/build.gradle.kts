@@ -28,6 +28,26 @@ android {
                 "proguard-rules.pro"
             )
         }
+        forEach{
+            it.buildConfigField(
+                "String","clientServerId","\"1094721950444-4lr9l4sffjv494gp24ff0v6t30jkgj2k.apps.googleusercontent.com\""
+            )
+            it.resValue(
+                "string",
+                "facebook_app_id",
+                "\"604418305804424\""
+            )
+            it.resValue(
+                "string",
+                "fb_login_protocol_scheme",
+                "\"fb604418305804424\""
+            )
+            it.resValue(
+                "string",
+                "facebook_client_token",
+                "\"0f0fce95e73191c342974d58edfd39f1\""
+            )
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -38,6 +58,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -61,5 +82,17 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics")
     // reactive network
     implementation ("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth")
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    implementation("androidx.datastore:datastore-preferences-core:1.1.1")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    //facebook
+    implementation("com.facebook.android:facebook-android-sdk:18.0.1")
+
 
 }
