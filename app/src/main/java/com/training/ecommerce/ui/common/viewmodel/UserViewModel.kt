@@ -1,13 +1,11 @@
-package com.training.ecommerce.ui.home.viewmodel
+package com.training.ecommerce.ui.common.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.training.ecommerce.data.repository.user.UserPreferencesRepository
-import com.training.ecommerce.data.repository.user.UserPreferencesRepositoryImpl
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class UserViewModel(

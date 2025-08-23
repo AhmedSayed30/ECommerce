@@ -3,11 +3,19 @@ package com.training.ecommerce.ui.auth.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.CreationExtras
+import com.training.ecommerce.data.models.Resource
 import com.training.ecommerce.data.repository.auth.FirebaseAuthRepository
 import com.training.ecommerce.data.repository.user.UserPreferencesRepository
-import com.training.ecommerce.ui.home.viewmodel.UserViewModel
+import com.training.ecommerce.utils.isValidEmail
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -16,18 +24,54 @@ class LoginViewModel(
 ): ViewModel() {
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
-
+    private val _loginState = MutableSharedFlow<Resource<String>>()
+    val loginState : SharedFlow<Resource<String>> = _loginState.asSharedFlow()
+    private val isValidate : Flow<Boolean> = combine(email,password){ email, password ->
+        email.isValidEmail() && password.length >= 6
+    }
     fun login(){
-        val email = email.value
-        val password = password.value
+        viewModelScope.launch {
+            val email = email.value
+            val password = password.value
+            if (isValidate.first()){
+                viewModelScope.launch {
+                    authRepository.loginWithEmailAndPassword(email, password).onEach { resource ->
+                        when(resource){
+                            is Resource.Success -> {_loginState.emit(Resource.Success(resource.data ?: "Empty User Id")) }
 
-        if (email.isNullOrBlank() && password.isNullOrBlank()){
-            viewModelScope.launch {
-                authRepository.loginWithEmailAndPassword(email, password)
+                            else -> _loginState.emit(resource)
+                        }
+                    }.launchIn(viewModelScope)
+                }
+            } else {
+                _loginState.emit(Resource.Error(Exception("Invalid Email or Password")))
             }
+
         }
 
     }
+
+    fun loginWithGoogle(idToken: String) =
+        viewModelScope.launch {
+            authRepository.loginWithGoogle(idToken).onEach { resource ->
+                when(resource){
+                    is Resource.Success -> {_loginState.emit(Resource.Success(resource.data ?: "Empty User Id")) }
+
+                    else -> _loginState.emit(resource)
+
+                }
+            }.launchIn(viewModelScope)
+        }
+
+    fun loginWithFacebook(idToken: String) =
+        viewModelScope.launch {
+            authRepository.loginWithFacebook(idToken).onEach { resource ->
+                when(resource){
+                    is Resource.Success -> {_loginState.emit(Resource.Success(resource.data ?: "Empty User Id")) }
+                    else -> _loginState.emit(resource)
+                }
+            }.launchIn(viewModelScope)
+        }
 
 
 companion object{

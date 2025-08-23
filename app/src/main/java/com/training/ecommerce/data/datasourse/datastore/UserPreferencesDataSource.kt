@@ -8,8 +8,8 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class UserPreferencesDataSourse(private val context: Context) {
-
+class UserPreferencesDataSource(private val context: Context) {
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DataStoreKeys.USER_PREFERENCES)
 
     //write to data store
     suspend fun saveLoginState(isLoggedIn:Boolean){

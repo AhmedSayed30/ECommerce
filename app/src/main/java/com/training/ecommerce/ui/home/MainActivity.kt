@@ -14,12 +14,10 @@ import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.training.ecommerce.R
-import com.training.ecommerce.data.datasourse.datastore.DataStoreKeys
-import com.training.ecommerce.data.datasourse.datastore.UserPreferencesDataSourse
-import com.training.ecommerce.data.datasourse.datastore.dataStore
+import com.training.ecommerce.data.datasourse.datastore.UserPreferencesDataSource
 import com.training.ecommerce.data.repository.user.UserPreferencesRepositoryImpl
-import com.training.ecommerce.ui.home.viewmodel.UserViewModel
-import com.training.ecommerce.ui.home.viewmodel.UserViewModelFactory
+import com.training.ecommerce.ui.common.viewmodel.UserViewModel
+import com.training.ecommerce.ui.common.viewmodel.UserViewModelFactory
 import com.training.ecommerce.ui.auth.login.AuthActivity
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.first
@@ -28,7 +26,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val viewModel : UserViewModel by viewModels {
-        UserViewModelFactory(UserPreferencesRepositoryImpl(UserPreferencesDataSourse(this)))
+        UserViewModelFactory(UserPreferencesRepositoryImpl(UserPreferencesDataSource(this)))
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         initSplashScreen()
@@ -37,9 +35,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch(Main){
             if (viewModel.isUserLoggedIn().first()){
                 setContentView(R.layout.activity_main)
-                viewModel.setIsLoggedIn(false)
             } else{
-                viewModel.setIsLoggedIn(true)
                 goToAuthActivity()
             }
         }

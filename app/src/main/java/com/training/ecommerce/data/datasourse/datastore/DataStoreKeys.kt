@@ -11,6 +11,7 @@ import com.training.ecommerce.data.datasourse.datastore.DataStoreKeys.E_COMMERCE
 object DataStoreKeys {
     val USER_ID = stringPreferencesKey("user_id")
     const val E_COMMERCE_PREFERENCES = "e_commerce_preferences"
+    const val USER_PREFERENCES = "user_preferences"
     val IS_USER_LOGGED_IN = booleanPreferencesKey("is_user_logged_in")
 }
 

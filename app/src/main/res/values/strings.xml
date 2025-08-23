@@ -11,4 +11,9 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="don_t_have_a_account">Don\'t have a account?</string>
     <string name="register">Register</string>
+    <string name="loading">Loading...</string>
+    <string name="ok">OK</string>
+    <string name="retry">Retry</string>
+    <string name="google_sign_in_failed_msg">sign in failled, please trt again later.</string>
+    <string name="generic_err_msg">Error please try again later.</string>
 </resources>
