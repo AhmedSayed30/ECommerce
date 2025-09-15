@@ -37,7 +37,11 @@ class LoginViewModel(
                 viewModelScope.launch {
                     authRepository.loginWithEmailAndPassword(email, password).onEach { resource ->
                         when(resource){
-                            is Resource.Success -> {_loginState.emit(Resource.Success(resource.data ?: "Empty User Id")) }
+                            is Resource.Success -> {
+                                val useId =resource.data ?: "Empty User Id"
+                                saveUserSession(useId)
+                                _loginState.emit(Resource.Success(useId))
+                            }
 
                             else -> _loginState.emit(resource)
                         }
@@ -55,7 +59,11 @@ class LoginViewModel(
         viewModelScope.launch {
             authRepository.loginWithGoogle(idToken).onEach { resource ->
                 when(resource){
-                    is Resource.Success -> {_loginState.emit(Resource.Success(resource.data ?: "Empty User Id")) }
+                    is Resource.Success -> {
+                        val useId =resource.data ?: "Empty User Id"
+                        saveUserSession(useId)
+                        _loginState.emit(Resource.Success(useId))
+                    }
 
                     else -> _loginState.emit(resource)
 
@@ -67,11 +75,20 @@ class LoginViewModel(
         viewModelScope.launch {
             authRepository.loginWithFacebook(idToken).onEach { resource ->
                 when(resource){
-                    is Resource.Success -> {_loginState.emit(Resource.Success(resource.data ?: "Empty User Id")) }
+                    is Resource.Success -> {
+                        val useId =resource.data ?: "Empty User Id"
+                        saveUserSession(useId)
+                        _loginState.emit(Resource.Success(useId))
+                    }
                     else -> _loginState.emit(resource)
                 }
             }.launchIn(viewModelScope)
         }
+
+    private suspend fun saveUserSession(userId: String) {
+        userPref.saveLoginState(true)
+        userPref.saveUserID(userId)
+    }
 
 
 companion object{

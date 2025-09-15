@@ -34,6 +34,7 @@ import com.training.ecommerce.databinding.FragmentLoginBinding
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModelFactory
 import com.training.ecommerce.ui.common.views.ProgressDialog
+import com.training.ecommerce.ui.home.MainActivity
 import com.training.ecommerce.ui.showRetrySnakeBarError
 import com.training.ecommerce.ui.showSnakeBarError
 import com.training.ecommerce.utils.CrashlyticsUtils
@@ -181,6 +182,7 @@ class LoginFragment : Fragment() {
                         is Resource.Success -> {
                             progressDialog.dismiss()
                             Toast.makeText(requireContext(),it.data,Toast.LENGTH_LONG).show()
+                            goToHome()
                         }
 
                         is Resource.Error -> {
@@ -193,6 +195,12 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
+    private fun goToHome() {
+        requireActivity().startActivity(Intent(activity, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {

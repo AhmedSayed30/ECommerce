@@ -12,11 +12,7 @@ class UserViewModel(
     private val userPref: UserPreferencesRepository
 ) : ViewModel() {
     suspend fun isUserLoggedIn() = userPref.isUserLoggedIn()
-    fun setIsLoggedIn(b: Boolean) {
-        viewModelScope.launch(IO) {
-            userPref.saveLoginState(b)
-        }
-    }
+
 }
 
 class UserViewModelFactory(
