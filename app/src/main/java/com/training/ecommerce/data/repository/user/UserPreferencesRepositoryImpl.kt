@@ -1,27 +1,32 @@
 package com.training.ecommerce.data.repository.user
 
-import com.training.ecommerce.data.datasourse.datastore.UserPreferencesDataSource
+import android.content.Context
+import com.training.ecommerce.data.datasourse.datastore.appDataStore
+import com.training.ecommerce.data.datasourse.datastore.userDetailsDataStore
+import com.training.ecommerce.data.models.user.UserDetailsPreferences
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class UserPreferencesRepositoryImpl(private val userPreferencesDataSource: UserPreferencesDataSource):
-    UserPreferencesRepository {
+class UserPreferencesRepositoryImpl(private val context: Context):UserPreferencesRepository {
+    override fun getUserDetails(): Flow<UserDetailsPreferences> =
+        context.userDetailsDataStore.data
 
-    //write to data store
-    override suspend fun saveLoginState(isLoggedIn:Boolean){
-        userPreferencesDataSource.saveLoginState(isLoggedIn)
+
+    override suspend fun getUserId(): Flow<String> =
+        context.userDetailsDataStore.data.map {it.id}
+
+    override suspend fun updateUserDetails(userDetails: UserDetailsPreferences) {
+        context.userDetailsDataStore.updateData { userDetails }
     }
 
-    override suspend fun saveUserID(userId: String) {
-        userPreferencesDataSource.saveUserID(userId)
-    }
+    override suspend fun updateUserId(userId: String) {
+        context.userDetailsDataStore.updateData {preferences ->
+            preferences.toBuilder().setId(userId).build()
+        }    }
 
-    override fun getUserID(): Flow<String> {
-        return userPreferencesDataSource.getUserID()
+    override suspend fun clearUserPreferences() {
+        context.userDetailsDataStore.updateData {preferences->
+            preferences.toBuilder().clear().build()
+        }
     }
-
-    //read from data store
-    override suspend fun isUserLoggedIn(): Flow<Boolean> {
-        return userPreferencesDataSource.isUserLoggedIn()
-    }
-
 }

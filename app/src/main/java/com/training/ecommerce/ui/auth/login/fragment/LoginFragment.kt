@@ -1,6 +1,7 @@
 package com.training.ecommerce.ui.auth.login.fragment
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,11 +27,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.training.ecommerce.R
-import com.training.ecommerce.data.datasourse.datastore.UserPreferencesDataSource
+import com.training.ecommerce.data.datasourse.datastore.AppPreferencesDataSource
 import com.training.ecommerce.data.models.Resource
 import com.training.ecommerce.data.repository.auth.FirebaseAuthRepositoryImpl
+import com.training.ecommerce.data.repository.common.AppPreferenceRepository
+import com.training.ecommerce.data.repository.common.AppPreferenceRepositoryImpl
 import com.training.ecommerce.data.repository.user.UserPreferencesRepositoryImpl
 import com.training.ecommerce.databinding.FragmentLoginBinding
+import com.training.ecommerce.ui.auth.login.AuthActivity
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModelFactory
 import com.training.ecommerce.ui.common.views.ProgressDialog
@@ -40,7 +44,9 @@ import com.training.ecommerce.ui.showSnakeBarError
 import com.training.ecommerce.utils.CrashlyticsUtils
 import com.training.ecommerce.utils.LoginException
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class LoginFragment : Fragment() {
@@ -50,11 +56,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binging get() = _binding!!
     private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(
-            userPref = UserPreferencesRepositoryImpl(
-                UserPreferencesDataSource(
-                    requireActivity())),
-            authRepository = FirebaseAuthRepositoryImpl())
+        LoginViewModelFactory(contextValue = requireContext())
     }
 
     override fun onCreateView(
@@ -70,6 +72,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initViewModel()
         initListeners()
 
@@ -181,12 +184,13 @@ class LoginFragment : Fragment() {
 
                         is Resource.Success -> {
                             progressDialog.dismiss()
-                            Toast.makeText(requireContext(),it.data,Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(),it.data?.id,Toast.LENGTH_LONG).show()
                             goToHome()
                         }
 
                         is Resource.Error -> {
                             progressDialog.dismiss()
+                            Log.d(TAG,"errrrrror: ${it.exception?.message}")
                             view?.showSnakeBarError(it.exception?.message.toString() ?: getString(R.string.generic_err_msg))
                             logAuthIssueToCrashlytics(it.exception?.message.toString() ?: getString(R.string.generic_err_msg),"Login Error")
 
@@ -196,6 +200,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
     private fun goToHome() {
         requireActivity().startActivity(Intent(activity, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -209,6 +214,6 @@ class LoginFragment : Fragment() {
     }
 
     companion object {
-       private const val TAG = "LoginFragment"
+        private const val TAG = "LoginFragment"
     }
 }

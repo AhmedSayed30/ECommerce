@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("com.google.protobuf") version "0.9.4" apply true
 }
 
 android {
@@ -76,6 +77,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0")
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation("com.google.firebase:firebase-firestore")
     //
     implementation("com.google.firebase:firebase-analytics")
     // crashlytics
@@ -91,8 +93,31 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences-core:1.1.1")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("com.google.protobuf:protobuf-kotlin-lite:4.26.0")
+
+    implementation ("androidx.datastore:datastore:1.0.0")
+    implementation ("com.google.protobuf:protobuf-javalite:3.23.4")
+
     //facebook
     implementation("com.facebook.android:facebook-android-sdk:18.0.1")
 
 
+}
+// Setup protobuf configuration, generating lite Java and Kotlin classes
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.26.1"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                register("java") {
+                    option("lite")
+                }
+                register("kotlin") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }
