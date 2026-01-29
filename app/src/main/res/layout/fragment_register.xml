@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.training.ecommerce.ui.auth.register.viewmodel.RegisterViewModel" />
     </data>
 
     <ScrollView
@@ -45,7 +47,8 @@
                     style="@style/EditTextStyle"
                     android:layout_marginTop="28dp"
                     android:drawableStart="@drawable/ic_user"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName"
+                    android:text="@={vm.name}"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -53,7 +56,8 @@
                     style="@style/EditTextStyle"
                     android:layout_marginTop="8dp"
                     android:drawableStart="@drawable/ic_email"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:text="@={vm.email}"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -61,7 +65,8 @@
                     style="@style/EditTextStyle"
                     android:drawableStart="@drawable/ic_passwordd"
                     android:layout_marginTop="8dp"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:text="@={vm.password}"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -69,13 +74,15 @@
                     style="@style/EditTextStyle"
                     android:layout_marginTop="8dp"
                     android:drawableStart="@drawable/ic_passwordd"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:text="@={vm.confirmPassword}"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="57dp"
                     android:layout_marginTop="16dp"
                     style="@style/PrimaryButtonStyle"
-                    android:text="@string/sign_up"/>
+                    android:text="@string/sign_up"
+                    android:onClickListener="@{() -> vm.signUp()}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

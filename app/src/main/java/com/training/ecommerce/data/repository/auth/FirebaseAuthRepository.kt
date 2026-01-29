@@ -18,6 +18,12 @@ interface FirebaseAuthRepository {
         idToken: String
     ): Flow<Resource<UserDetailsModel>>
 
+    suspend fun createUser(
+        name: String,
+        email: String,
+        password: String
+    ):Flow<Resource<UserDetailsModel>>
+
     fun logout()
 
 }
