@@ -4,6 +4,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.training.ecommerce.data.models.Resource
 import com.training.ecommerce.data.models.user.AuthProvider
@@ -33,6 +34,55 @@ class FirebaseAuthRepositoryImpl(private val auth: FirebaseAuth = FirebaseAuth.g
     override suspend fun loginWithFacebook(idToken: String): Flow<Resource<UserDetailsModel>> = login(AuthProvider.FACEBOOK){
         val credential = FacebookAuthProvider.getCredential(idToken)
         auth.signInWithCredential(credential).await()
+    }
+
+    override suspend fun createUser(
+        name: String,
+        email: String,
+        password: String
+    ): Flow<Resource<UserDetailsModel>> =flow{
+        try {
+            emit(Resource.Loading())
+            val authResult = auth.createUserWithEmailAndPassword(email,password).await()
+            val userId = authResult.user?.uid
+
+            if (userId == null) {
+                val msg = "Sign up UserID not found"
+                logAuthIssueToCrashlytics(msg, AuthProvider.EMAIL.name)
+                emit(Resource.Error(Exception(msg)))
+                return@flow
+            }
+
+            // create user details object
+            val userDetails: UserDetailsModel = UserDetailsModel(
+                name = name,
+                id = userId,
+                email = email,
+                createdAt = System.currentTimeMillis()
+            )
+
+            // save user details to firestore
+            firestore.collection("users").document(userId).set(userDetails).await()
+
+            authResult?.user?.sendEmailVerification()?.await()
+
+            emit(Resource.Success(userDetails))
+        }catch (e: Exception) {
+            logAuthIssueToCrashlytics(
+                e.message ?: "Unknown error from exception = ${e::class.java}", "signUp")
+            emit(Resource.Error(e))
+        }
+
+    }
+
+    override suspend fun sendUpdatePasswordEmail(email: String): Flow<Resource<String>> = flow {
+        try{
+            emit(Resource.Loading())
+            val authResult = auth.sendPasswordResetEmail(email).await()
+            emit(Resource.Success("Password reset email sent"))
+        }catch (e: Exception) {
+            emit(Resource.Error(e))
+        }
     }
 
 

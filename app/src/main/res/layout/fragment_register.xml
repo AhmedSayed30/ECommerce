@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.training.ecommerce.ui.auth.register.viewmodel.RegisterViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.auth.register.fragment.RegisterFragment">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="96dp"
+                    android:src="@drawable/inner_logo"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome_register_msg"
+                    style="@style/TitleTextStyle"
+                    android:layout_marginTop="16dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_new_account_msg"
+                    android:layout_marginTop="8dp"
+                    style="@style/MassageTextStyle"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/full_name"
+                    style="@style/EditTextStyle"
+                    android:layout_marginTop="28dp"
+                    android:drawableStart="@drawable/ic_user"
+                    android:inputType="textPersonName"
+                    android:text="@={vm.name}"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/your_email"
+                    style="@style/EditTextStyle"
+                    android:layout_marginTop="8dp"
+                    android:drawableStart="@drawable/ic_email"
+                    android:inputType="textEmailAddress"
+                    android:text="@={vm.email}"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/password"
+                    style="@style/EditTextStyle"
+                    android:drawableStart="@drawable/ic_passwordd"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPassword"
+                    android:text="@={vm.password}"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/password_again"
+                    style="@style/EditTextStyle"
+                    android:layout_marginTop="8dp"
+                    android:drawableStart="@drawable/ic_passwordd"
+                    android:inputType="textPassword"
+                    android:text="@={vm.confirmPassword}"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:layout_marginTop="16dp"
+                    style="@style/PrimaryButtonStyle"
+                    android:text="@string/sign_up"
+                    android:onClickListener="@{() -> vm.signUp()}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="24dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/have_a_account"
+                        style="@style/MassageTextStyle"/>
+                    <TextView
+                        android:id="@+id/tv_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sign_in"
+                        android:layout_marginStart="4dp"
+                        style="@style/MediumPrimaryTextViewStyle"/>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </ScrollView>
+
+</layout>

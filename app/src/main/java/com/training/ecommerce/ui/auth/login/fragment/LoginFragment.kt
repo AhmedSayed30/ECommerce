@@ -1,7 +1,6 @@
 package com.training.ecommerce.ui.auth.login.fragment
 
 import android.app.Activity
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -26,15 +26,10 @@ import com.training.ecommerce.BuildConfig
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.training.ecommerce.ui.auth.forgetpassword.fragment.ForgetPasswordFragment
 import com.training.ecommerce.R
-import com.training.ecommerce.data.datasourse.datastore.AppPreferencesDataSource
 import com.training.ecommerce.data.models.Resource
-import com.training.ecommerce.data.repository.auth.FirebaseAuthRepositoryImpl
-import com.training.ecommerce.data.repository.common.AppPreferenceRepository
-import com.training.ecommerce.data.repository.common.AppPreferenceRepositoryImpl
-import com.training.ecommerce.data.repository.user.UserPreferencesRepositoryImpl
 import com.training.ecommerce.databinding.FragmentLoginBinding
-import com.training.ecommerce.ui.auth.login.AuthActivity
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModelFactory
 import com.training.ecommerce.ui.common.views.ProgressDialog
@@ -44,9 +39,7 @@ import com.training.ecommerce.ui.showSnakeBarError
 import com.training.ecommerce.utils.CrashlyticsUtils
 import com.training.ecommerce.utils.LoginException
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 class LoginFragment : Fragment() {
@@ -88,6 +81,12 @@ class LoginFragment : Fragment() {
             }else {
                 loginWithFacebookRequest()
             }
+        }
+        binging.tvRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+        binging.tvForgotPassword.setOnClickListener {
+            ForgetPasswordFragment().show(parentFragmentManager,"Forget Password")
         }
     }
 
@@ -207,6 +206,8 @@ class LoginFragment : Fragment() {
         })
         requireActivity().finish()
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -8,7 +8,7 @@
             type="com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -112,6 +112,7 @@
                     style="@style/SocialButtonStyle"/>
                 
                 <TextView
+                    android:id="@+id/tv_forgot_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -131,6 +132,7 @@
                         android:text="@string/don_t_have_a_account"
                         style="@style/MassageTextStyle"/>
                     <TextView
+                        android:id="@+id/tv_register"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/register"
@@ -141,6 +143,6 @@
 
         </FrameLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 </layout>

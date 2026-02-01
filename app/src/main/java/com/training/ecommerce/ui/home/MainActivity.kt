@@ -18,8 +18,7 @@ import com.training.ecommerce.R
 import com.training.ecommerce.databinding.ActivityMainBinding
 import com.training.ecommerce.ui.common.viewmodel.UserViewModel
 import com.training.ecommerce.ui.common.viewmodel.UserViewModelFactory
-import com.training.ecommerce.ui.auth.login.AuthActivity
-import kotlinx.coroutines.flow.collectLatest
+import com.training.ecommerce.ui.auth.AuthActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
