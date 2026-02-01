@@ -75,6 +75,16 @@ class FirebaseAuthRepositoryImpl(private val auth: FirebaseAuth = FirebaseAuth.g
 
     }
 
+    override suspend fun sendUpdatePasswordEmail(email: String): Flow<Resource<String>> = flow {
+        try{
+            emit(Resource.Loading())
+            val authResult = auth.sendPasswordResetEmail(email).await()
+            emit(Resource.Success("Password reset email sent"))
+        }catch (e: Exception) {
+            emit(Resource.Error(e))
+        }
+    }
+
 
     private suspend fun login(
         provider: AuthProvider,

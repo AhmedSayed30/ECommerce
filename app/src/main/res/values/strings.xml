@@ -24,4 +24,6 @@
     <string name="password_again">Password Again</string>
     <string name="sign_up">Sign Up</string>
     <string name="have_a_account">have a account?</string>
+    <string name="forget_password_massage">Enter your email, to send an email to update your password</string>
+    <string name="sent">Sent</string>
 </resources>

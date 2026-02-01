@@ -26,12 +26,12 @@ import com.training.ecommerce.BuildConfig
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.training.ecommerce.ui.auth.forgetpassword.fragment.ForgetPasswordFragment
 import com.training.ecommerce.R
 import com.training.ecommerce.data.models.Resource
 import com.training.ecommerce.databinding.FragmentLoginBinding
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModelFactory
-import com.training.ecommerce.ui.auth.register.fragment.RegisterFragment
 import com.training.ecommerce.ui.common.views.ProgressDialog
 import com.training.ecommerce.ui.home.MainActivity
 import com.training.ecommerce.ui.showRetrySnakeBarError
@@ -84,6 +84,9 @@ class LoginFragment : Fragment() {
         }
         binging.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+        binging.tvForgotPassword.setOnClickListener {
+            ForgetPasswordFragment().show(parentFragmentManager,"Forget Password")
         }
     }
 
