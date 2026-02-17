@@ -65,7 +65,6 @@ class LoginViewModel(
         viewModelScope.launch(IO) {
             loginFlow().collect { resource ->
                 when (resource) {
-
                     is Resource.Success -> {
                         savePreferenceData(resource.data!!)
                         _loginState.emit(Resource.Success(resource.data))

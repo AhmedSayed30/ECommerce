@@ -30,9 +30,10 @@ import com.training.ecommerce.ui.auth.forgetpassword.fragment.ForgetPasswordFrag
 import com.training.ecommerce.R
 import com.training.ecommerce.data.models.Resource
 import com.training.ecommerce.databinding.FragmentLoginBinding
+import com.training.ecommerce.ui.auth.AuthActivity
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModel
 import com.training.ecommerce.ui.auth.login.viewmodel.LoginViewModelFactory
-import com.training.ecommerce.ui.common.views.ProgressDialog
+import com.training.ecommerce.ui.common.views.LoadingDialog
 import com.training.ecommerce.ui.home.MainActivity
 import com.training.ecommerce.ui.showRetrySnakeBarError
 import com.training.ecommerce.ui.showSnakeBarError
@@ -41,11 +42,10 @@ import com.training.ecommerce.utils.LoginException
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 class LoginFragment : Fragment() {
     private val callbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
+    private val loadingDialog by lazy { LoadingDialog(requireContext()) }
     private val loginManager: LoginManager by lazy { LoginManager.getInstance() }
-    val progressDialog by lazy {ProgressDialog.createProgressDialog(requireActivity())}
     private var _binding: FragmentLoginBinding? = null
     private val binging get() = _binding!!
     private val viewModel: LoginViewModel by viewModels {
@@ -178,17 +178,17 @@ class LoginFragment : Fragment() {
                 it .let {
                     when (it) {
                         is Resource.Loading -> {
-                            progressDialog.show()
+                          loadingDialog.show()
                         }
 
                         is Resource.Success -> {
-                            progressDialog.dismiss()
+                       loadingDialog.dismiss()
                             Toast.makeText(requireContext(),it.data?.id,Toast.LENGTH_LONG).show()
                             goToHome()
                         }
 
                         is Resource.Error -> {
-                            progressDialog.dismiss()
+                       loadingDialog.dismiss()
                             Log.d(TAG,"errrrrror: ${it.exception?.message}")
                             view?.showSnakeBarError(it.exception?.message.toString() ?: getString(R.string.generic_err_msg))
                             logAuthIssueToCrashlytics(it.exception?.message.toString() ?: getString(R.string.generic_err_msg),"Login Error")

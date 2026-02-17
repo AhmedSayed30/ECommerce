@@ -17,7 +17,7 @@ import com.training.ecommerce.databinding.FragmentRegisterBinding
 import com.training.ecommerce.ui.auth.login.fragment.LoginFragment
 import com.training.ecommerce.ui.auth.register.viewmodel.RegisterViewModel
 import com.training.ecommerce.ui.auth.register.viewmodel.RegisterViewModelFactory
-import com.training.ecommerce.ui.common.views.ProgressDialog
+import com.training.ecommerce.ui.common.views.LoadingDialog
 import com.training.ecommerce.ui.home.MainActivity
 import com.training.ecommerce.ui.showSnakeBarError
 import com.training.ecommerce.utils.CrashlyticsUtils
@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity())}
+    val progressDialog by lazy { LoadingDialog(requireContext()) }
 
     private val viewModel: RegisterViewModel by viewModels{
         RegisterViewModelFactory(requireContext())

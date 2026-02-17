@@ -3,17 +3,17 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    id("com.google.protobuf") version "0.9.4" apply true
+    id("com.google.protobuf") version "0.9.6" apply true
 }
 
 android {
     namespace = "com.training.ecommerce"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.training.ecommerce"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
